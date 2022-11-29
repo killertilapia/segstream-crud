@@ -5,12 +5,11 @@ FROM node:18-alpine as build-deps
 
 WORKDIR /app/
 
-COPY frontend/package.json frontend/yarn.lock /app/
-RUN yarn
+COPY frontend/package*.json ./
+RUN npm install
 
 COPY frontend /app/
-COPY .env /app/.env
-RUN yarn build
+RUN npm run build
 
 # Stage 2 - nginx & frontend dist
 FROM nginx:alpine

@@ -2,18 +2,21 @@ version: '3'
 
 services:
   backend:
-    build: ./segstream/
+    build:
+      context: .
+      dockerfile: segstream/Dockerfile
+    env_file:
+      - segstream/.env
     command:
       - /bin/sh
       - -c
-      - |        
-        python manage.py migrate
-        python manage.py runserver 0.0.0.0:8000
+      - |
+        poetry run python manage.py migrate
+        poetry run python manage.py runserver 0.0.0.0:8000
     volumes:
-      - ./backend:/code
+      - ./segstream:/code
     ports:
       - "8000:8000"
-    restart: always
 
   webserver:
     build:
@@ -24,5 +27,5 @@ services:
     depends_on:
       - backend
     volumes:
-      - ./backend/staticfiles/:/staticfiles/
+      - ./static/:/static/
       - ./webserver/nginx.conf:/etc/nginx/nginx.conf:ro
