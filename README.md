@@ -31,7 +31,7 @@ The `admin` route is also available.
 - Made with Vue3
 
 1. `$ cd frontend`
-2. `$ npm install` - should run for a few minutes
+2. `$ npm install --include=dev` - should run for a few minutes
 3. `$ npm run dev`
 4. Open a browser and navigate to http://localhost:5173
 
@@ -43,4 +43,7 @@ The `admin` route is also available.
 The `test_settings.py` file inherits from the `settings.py`. The only difference
 is that the `test_settings.py` uses a memory-only DB.
 
+## Docker
 
+1. `$ docker compose up`
+2. Open browser to http://localhost
